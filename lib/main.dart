@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:provider/provider.dart';
+import 'package:provider_get_it/ui/views/sign_up.dart';
+import 'package:provider_get_it/view_models/global_view_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
-  runApp(App());
+  runApp(
+    ChangeNotifierProvider(
+      create: (context) => GlobalViewModel(),
+      child: App(),
+    ),
+    // App(),
+  );
 }
 
 class App extends StatefulWidget {
@@ -43,12 +52,10 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!',
-              style: Theme.of(context).textTheme.headline3),
-        ),
-      ),
+      debugShowCheckedModeBanner: false,
+      routes: {
+        '/': (x) => SignUp(),
+      },
     );
   }
 }
