@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider_get_it/enums/view_state.dart';
 import 'package:provider_get_it/ui/widgets/custom_app_bar.dart';
 import 'package:provider_get_it/view_models/global_view_model.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_get_it/constants.dart';
 
 class SignUp extends StatefulWidget {
   SignUp({Key? key}) : super(key: key);
@@ -17,8 +17,7 @@ class _SignUpState extends State<SignUp> {
     return Scaffold(
       appBar: PreferredSize(
         child: CustomAppBar(),
-        preferredSize:
-            Size.fromHeight(context.read<GlobalViewModel>().appBarHeight),
+        preferredSize: Size.fromHeight(appBarHeight),
       ),
       body: Center(
         child: Text('Sign Up', style: Theme.of(context).textTheme.headline3),

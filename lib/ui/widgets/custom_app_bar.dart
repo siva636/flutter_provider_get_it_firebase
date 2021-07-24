@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
+import 'package:provider_get_it/constants.dart';
 
 class CustomAppBar extends StatefulWidget {
   CustomAppBar() : super(key: Key('custom_app_bar'));
@@ -36,19 +37,19 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       icon: Icon(Icons.home_outlined),
                       label: Text('Home'),
                     ),
-                    SizedBox(width: 4),
+                    SizedBox(width: menuGap),
                     OutlinedButton.icon(
                       onPressed: onHelpPressed,
                       icon: Icon(Icons.help_outline),
                       label: Text('Help'),
                     ),
-                    SizedBox(width: 4),
+                    SizedBox(width: menuGap),
                     OutlinedButton.icon(
                       onPressed: onSearchPressed,
                       icon: Icon(Icons.search_outlined),
                       label: Text('Search'),
                     ),
-                    SizedBox(width: 4),
+                    SizedBox(width: menuGap),
                     OutlinedButton.icon(
                       onPressed: onAccountPressed,
                       icon: Icon(Icons.person_outlined),
