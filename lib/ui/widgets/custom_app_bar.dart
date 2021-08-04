@@ -18,18 +18,20 @@ class _CustomAppBarState extends State<CustomAppBar> {
     final onAccountPressed = () {};
     final double margin = getBreakpointEntry(context).margin;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: margin),
-      child: NavigationToolbar(
+    return Container(
+      width: null,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: margin),
+        child: NavigationToolbar(
           centerMiddle: true,
           leading: Align(
               child: Text('My Company',
                   style: Theme.of(context).textTheme.headline5),
               alignment: Alignment.centerLeft),
-          middle: getWindowType(context) == AdaptiveWindowType.xsmall ||
-                  getWindowType(context) == AdaptiveWindowType.small
-              ? null
-              : Row(
+          middle: getWindowType(context) == AdaptiveWindowType.xlarge ||
+                  getWindowType(context) == AdaptiveWindowType.large ||
+                  getWindowType(context) == AdaptiveWindowType.medium
+              ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     OutlinedButton.icon(
@@ -56,32 +58,70 @@ class _CustomAppBarState extends State<CustomAppBar> {
                       label: Text('Account'),
                     ),
                   ],
-                ),
-          trailing: getWindowType(context) == AdaptiveWindowType.xsmall ||
-                  getWindowType(context) == AdaptiveWindowType.small
-              ? Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      onPressed: onHomePressed,
-                      icon: Icon(Icons.home_outlined),
+                )
+              : null,
+          trailing: getWindowType(context) == AdaptiveWindowType.xsmall
+              ? PopupMenuButton<Menu>(
+                  onSelected: (Menu selected) {},
+                  itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
+                    const PopupMenuItem<Menu>(
+                      value: Menu.home,
+                      child: ListTile(
+                        leading: Icon(Icons.home_outlined),
+                        title: Text('Home'),
+                      ),
                     ),
-                    IconButton(
-                      onPressed: onHelpPressed,
-                      icon: Icon(Icons.help_outline),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.help,
+                      child: ListTile(
+                        leading: Icon(Icons.help_outline),
+                        title: Text('Help'),
+                      ),
                     ),
-                    IconButton(
-                      onPressed: onSearchPressed,
-                      icon: Icon(Icons.search_outlined),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.search,
+                      child: ListTile(
+                        leading: Icon(Icons.search_outlined),
+                        title: Text('Search'),
+                      ),
                     ),
-                    IconButton(
-                      onPressed: onAccountPressed,
-                      icon: Icon(Icons.person_outlined),
+                    const PopupMenuItem<Menu>(
+                      value: Menu.account,
+                      child: ListTile(
+                        leading: Icon(Icons.person_outlined),
+                        title: Text('Account'),
+                      ),
                     ),
                   ],
                 )
-              : null),
+              : getWindowType(context) == AdaptiveWindowType.small
+                  ? Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        IconButton(
+                          onPressed: onHomePressed,
+                          icon: Icon(Icons.home_outlined),
+                        ),
+                        IconButton(
+                          onPressed: onHelpPressed,
+                          icon: Icon(Icons.help_outline),
+                        ),
+                        IconButton(
+                          onPressed: onSearchPressed,
+                          icon: Icon(Icons.search_outlined),
+                        ),
+                        IconButton(
+                          onPressed: onAccountPressed,
+                          icon: Icon(Icons.person_outlined),
+                        ),
+                      ],
+                    )
+                  : null,
+        ),
+      ),
     );
   }
 }
+
+enum Menu { home, help, search, account }
