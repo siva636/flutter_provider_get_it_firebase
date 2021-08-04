@@ -16,6 +16,7 @@ class _CustomAppBarState extends State<CustomAppBar> {
     final onSearchPressed = () {};
     final onHelpPressed = () {};
     final onAccountPressed = () {};
+
     final double margin = getBreakpointEntry(context).margin;
 
     return Container(
@@ -60,60 +61,62 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   ],
                 )
               : null,
-          trailing: getWindowType(context) == AdaptiveWindowType.xsmall
-              ? PopupMenuButton<Menu>(
-                  onSelected: (Menu selected) {},
-                  itemBuilder: (BuildContext context) => <PopupMenuEntry<Menu>>[
-                    const PopupMenuItem<Menu>(
-                      value: Menu.home,
-                      child: ListTile(
-                        leading: Icon(Icons.home_outlined),
-                        title: Text('Home'),
-                      ),
+          trailing: getWindowType(context) == AdaptiveWindowType.small
+              ? Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      onPressed: onHomePressed,
+                      icon: Icon(Icons.home_outlined),
                     ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.help,
-                      child: ListTile(
-                        leading: Icon(Icons.help_outline),
-                        title: Text('Help'),
-                      ),
+                    IconButton(
+                      onPressed: onHelpPressed,
+                      icon: Icon(Icons.help_outline),
                     ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.search,
-                      child: ListTile(
-                        leading: Icon(Icons.search_outlined),
-                        title: Text('Search'),
-                      ),
+                    IconButton(
+                      onPressed: onSearchPressed,
+                      icon: Icon(Icons.search_outlined),
                     ),
-                    const PopupMenuItem<Menu>(
-                      value: Menu.account,
-                      child: ListTile(
-                        leading: Icon(Icons.person_outlined),
-                        title: Text('Account'),
-                      ),
+                    IconButton(
+                      onPressed: onAccountPressed,
+                      icon: Icon(Icons.person_outlined),
                     ),
                   ],
                 )
-              : getWindowType(context) == AdaptiveWindowType.small
-                  ? Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          onPressed: onHomePressed,
-                          icon: Icon(Icons.home_outlined),
+              : getWindowType(context) == AdaptiveWindowType.xsmall
+                  ? PopupMenuButton<Menu>(
+                      icon: Icon(Icons.menu),
+                      onSelected: (Menu selected) {},
+                      itemBuilder: (BuildContext context) =>
+                          <PopupMenuEntry<Menu>>[
+                        const PopupMenuItem<Menu>(
+                          value: Menu.home,
+                          child: ListTile(
+                            leading: Icon(Icons.home_outlined),
+                            title: Text('Home'),
+                          ),
                         ),
-                        IconButton(
-                          onPressed: onHelpPressed,
-                          icon: Icon(Icons.help_outline),
+                        const PopupMenuItem<Menu>(
+                          value: Menu.help,
+                          child: ListTile(
+                            leading: Icon(Icons.help_outline),
+                            title: Text('Help'),
+                          ),
                         ),
-                        IconButton(
-                          onPressed: onSearchPressed,
-                          icon: Icon(Icons.search_outlined),
+                        const PopupMenuItem<Menu>(
+                          value: Menu.search,
+                          child: ListTile(
+                            leading: Icon(Icons.search_outlined),
+                            title: Text('Search'),
+                          ),
                         ),
-                        IconButton(
-                          onPressed: onAccountPressed,
-                          icon: Icon(Icons.person_outlined),
+                        const PopupMenuItem<Menu>(
+                          value: Menu.account,
+                          child: ListTile(
+                            leading: Icon(Icons.person_outlined),
+                            title: Text('Account'),
+                          ),
                         ),
                       ],
                     )
