@@ -12,10 +12,22 @@ class CustomAppBar extends StatefulWidget {
 class _CustomAppBarState extends State<CustomAppBar> {
   @override
   Widget build(BuildContext context) {
-    final onHomePressed = () {};
-    final onSearchPressed = () {};
-    final onHelpPressed = () {};
-    final onAccountPressed = () {};
+    final onGlobalMenuSelected = (GlobalMenu globalMenu) {
+      switch (globalMenu) {
+        case GlobalMenu.home:
+          Navigator.pushNamed(context, '/');
+          break;
+        case GlobalMenu.help:
+          Navigator.pushNamed(context, '/help');
+          break;
+        case GlobalMenu.search:
+          Navigator.pushNamed(context, '/search');
+          break;
+        case GlobalMenu.account:
+          Navigator.pushNamed(context, '/account');
+          break;
+      }
+    };
 
     final double margin = getBreakpointEntry(context).margin;
 
@@ -36,25 +48,33 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     OutlinedButton.icon(
-                      onPressed: onHomePressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.home);
+                      },
                       icon: Icon(Icons.home_outlined),
                       label: Text('Home'),
                     ),
                     SizedBox(width: menuGap),
                     OutlinedButton.icon(
-                      onPressed: onHelpPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.help);
+                      },
                       icon: Icon(Icons.help_outline),
                       label: Text('Help'),
                     ),
                     SizedBox(width: menuGap),
                     OutlinedButton.icon(
-                      onPressed: onSearchPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.search);
+                      },
                       icon: Icon(Icons.search_outlined),
                       label: Text('Search'),
                     ),
                     SizedBox(width: menuGap),
                     OutlinedButton.icon(
-                      onPressed: onAccountPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.account);
+                      },
                       icon: Icon(Icons.person_outlined),
                       label: Text('Account'),
                     ),
@@ -67,52 +87,62 @@ class _CustomAppBarState extends State<CustomAppBar> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                      onPressed: onHomePressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.home);
+                      },
                       icon: Icon(Icons.home_outlined),
                     ),
                     IconButton(
-                      onPressed: onHelpPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.help);
+                      },
                       icon: Icon(Icons.help_outline),
                     ),
                     IconButton(
-                      onPressed: onSearchPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.search);
+                      },
                       icon: Icon(Icons.search_outlined),
                     ),
                     IconButton(
-                      onPressed: onAccountPressed,
+                      onPressed: () {
+                        onGlobalMenuSelected(GlobalMenu.account);
+                      },
                       icon: Icon(Icons.person_outlined),
                     ),
                   ],
                 )
               : getWindowType(context) == AdaptiveWindowType.xsmall
-                  ? PopupMenuButton<Menu>(
+                  ? PopupMenuButton<GlobalMenu>(
                       icon: Icon(Icons.menu),
-                      onSelected: (Menu selected) {},
+                      onSelected: (GlobalMenu globalMenu) {
+                        onGlobalMenuSelected(globalMenu);
+                      },
                       itemBuilder: (BuildContext context) =>
-                          <PopupMenuEntry<Menu>>[
-                        const PopupMenuItem<Menu>(
-                          value: Menu.home,
+                          <PopupMenuEntry<GlobalMenu>>[
+                        const PopupMenuItem<GlobalMenu>(
+                          value: GlobalMenu.home,
                           child: ListTile(
                             leading: Icon(Icons.home_outlined),
                             title: Text('Home'),
                           ),
                         ),
-                        const PopupMenuItem<Menu>(
-                          value: Menu.help,
+                        const PopupMenuItem<GlobalMenu>(
+                          value: GlobalMenu.help,
                           child: ListTile(
                             leading: Icon(Icons.help_outline),
                             title: Text('Help'),
                           ),
                         ),
-                        const PopupMenuItem<Menu>(
-                          value: Menu.search,
+                        const PopupMenuItem<GlobalMenu>(
+                          value: GlobalMenu.search,
                           child: ListTile(
                             leading: Icon(Icons.search_outlined),
                             title: Text('Search'),
                           ),
                         ),
-                        const PopupMenuItem<Menu>(
-                          value: Menu.account,
+                        const PopupMenuItem<GlobalMenu>(
+                          value: GlobalMenu.account,
                           child: ListTile(
                             leading: Icon(Icons.person_outlined),
                             title: Text('Account'),
@@ -127,4 +157,4 @@ class _CustomAppBarState extends State<CustomAppBar> {
   }
 }
 
-enum Menu { home, help, search, account }
+enum GlobalMenu { home, help, search, account }

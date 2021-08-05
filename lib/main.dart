@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_get_it/ui/views/account.dart';
+import 'package:provider_get_it/ui/views/help.dart';
+import 'package:provider_get_it/ui/views/home.dart';
+import 'package:provider_get_it/ui/views/search.dart';
 import 'package:provider_get_it/ui/views/sign_up.dart';
 import 'package:provider_get_it/view_models/global_view_model.dart';
 
@@ -36,7 +40,7 @@ class _AppState extends State<App> {
 
         // Once complete, show your application
         if (snapshot.connectionState == ConnectionState.done) {
-          return Home();
+          return MainHome();
         }
 
         // Otherwise, show something whilst waiting for initialization to complete
@@ -46,15 +50,19 @@ class _AppState extends State<App> {
   }
 }
 
-class Home extends StatelessWidget {
-  const Home({Key? key}) : super(key: key);
+class MainHome extends StatelessWidget {
+  const MainHome({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       routes: {
-        '/': (x) => SignUp(),
+        '/': (BuildContext context) => Home(),
+        '/help': (BuildContext context) => Help(),
+        '/search': (BuildContext context) => Search(),
+        '/account': (BuildContext context) => Account(),
+        '/sign_up': (BuildContext context) => SignUp(),
       },
     );
   }
