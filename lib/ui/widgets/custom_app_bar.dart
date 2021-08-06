@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:adaptive_breakpoints/adaptive_breakpoints.dart';
 import 'package:provider_get_it/constants.dart';
+import 'package:provider_get_it/services/adaptive_breakpoints.dart';
 
 class CustomAppBar extends StatefulWidget {
   CustomAppBar() : super(key: Key('custom_app_bar'));
@@ -29,21 +29,18 @@ class _CustomAppBarState extends State<CustomAppBar> {
       }
     };
 
-    final double margin = getBreakpointEntry(context).margin;
+    final double gutter = getBreakpointsInfo(context).gutter;
 
     return Container(
-      width: null,
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: margin),
+        padding: EdgeInsets.symmetric(horizontal: gutter),
         child: NavigationToolbar(
           centerMiddle: true,
           leading: Align(
               child: Text('My Company',
                   style: Theme.of(context).textTheme.headline5),
               alignment: Alignment.centerLeft),
-          middle: getWindowType(context) == AdaptiveWindowType.xlarge ||
-                  getWindowType(context) == AdaptiveWindowType.large ||
-                  getWindowType(context) == AdaptiveWindowType.medium
+          middle: getWindowType(context) >= AdaptiveWindowType.smallPlus
               ? Row(
                   mainAxisSize: MainAxisSize.min,
                   children: [

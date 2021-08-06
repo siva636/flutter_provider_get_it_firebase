@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider_get_it/constants.dart';
+import 'package:provider_get_it/services/adaptive_breakpoints.dart';
 import 'package:provider_get_it/ui/widgets/custom_app_bar.dart';
 
 class Home extends StatelessWidget {
@@ -7,13 +8,18 @@ class Home extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final double margin = getBreakpointsInfo(context).margin;
     return Scaffold(
       appBar: PreferredSize(
         child: CustomAppBar(),
         preferredSize: Size.fromHeight(appBarHeight),
       ),
-      body: Center(
-        child: Text('Home', style: Theme.of(context).textTheme.headline3),
+      body: Container(
+        margin: EdgeInsets.symmetric(horizontal: margin),
+        color: Colors.yellow,
+        child: Center(
+          child: Text('Home', style: Theme.of(context).textTheme.headline3),
+        ),
       ),
     );
   }
