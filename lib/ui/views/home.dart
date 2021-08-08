@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider_get_it/constants.dart';
 import 'package:provider_get_it/services/adaptive_breakpoints.dart';
+import 'package:provider_get_it/ui/widgets/country_name_with_flag.dart';
 import 'package:provider_get_it/ui/widgets/custom_app_bar.dart';
 
 class Home extends StatelessWidget {
@@ -16,7 +17,6 @@ class Home extends StatelessWidget {
       ),
       body: Container(
         margin: EdgeInsets.symmetric(horizontal: margin),
-        color: Colors.yellow,
         child: Center(
           child: Text('Home', style: Theme.of(context).textTheme.headline3),
         ),
