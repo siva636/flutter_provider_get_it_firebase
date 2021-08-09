@@ -19,6 +19,7 @@ class Home extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: margin),
         child: Center(
           child: Text('Home', style: Theme.of(context).textTheme.headline3),
+          // child: CountryNameWithFlag(countryCode: 'GB'),
         ),
       ),
     );

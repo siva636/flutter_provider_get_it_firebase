@@ -3,7 +3,7 @@ import 'package:provider_get_it/services/world/country_info.dart';
 
 class CountryNameWithFlag extends StatelessWidget {
   CountryNameWithFlag({Key? key, required this.countryCode}) : super(key: key);
-  String countryCode;
+  final String countryCode;
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,8 @@ class CountryNameWithFlag extends StatelessWidget {
         SizedBox(
           width: 4,
         ),
-        Text(CountryInfo().getCountryName(countryCode)),
+        Text(CountryInfo().getCountry(countryCode)?.countryName ??
+            'Country Not Found'),
       ],
     );
   }
