@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:provider_get_it/services/get_it.dart';
 import 'package:provider_get_it/ui/views/account.dart';
 import 'package:provider_get_it/ui/views/help.dart';
 import 'package:provider_get_it/ui/views/home.dart';
@@ -10,6 +12,7 @@ import 'package:provider_get_it/view_models/global_view_model.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
+  getItSetup();
   runApp(
     ChangeNotifierProvider(
       create: (context) => GlobalViewModel(),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider_get_it/services/world/country_info.dart';
+import 'package:provider_get_it/services/get_it.dart';
 
 class CountryNameWithFlag extends StatelessWidget {
   CountryNameWithFlag({Key? key, required this.countryCode}) : super(key: key);
@@ -20,7 +21,7 @@ class CountryNameWithFlag extends StatelessWidget {
         SizedBox(
           width: 4,
         ),
-        Text(CountryInfo().getCountry(countryCode)?.countryName ??
+        Text(getIt<CountryInfo>().getCountry(countryCode)?.countryName ??
             'Country Not Found'),
       ],
     );
